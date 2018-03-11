@@ -23,4 +23,8 @@ $router->get('/', function () use ($router) {
 $router->post('/search','SearcherController@search');
 
 $router->get('/estadistica','SearcherController@estadistica');
+
+$router->get('/php',function(){
+    phpinfo();
+});
 //$router->post('/prueba','SearcherController@prueba');
