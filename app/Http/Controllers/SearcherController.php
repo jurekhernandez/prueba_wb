@@ -44,9 +44,9 @@ class SearcherController extends Controller
     }
 
     public function estadistica(){
-$productos = DB::table('producto_busqueda')->pluck('title', 'name')->get();
+/*$productos = DB::table('producto_busqueda')->pluck('title', 'name')->get();
 
-dd($productos);
+dd($productos);/*
         /*$productos = Productos::all();
        foreach($productos as $producto){
             echo"</br>**********</br>";
