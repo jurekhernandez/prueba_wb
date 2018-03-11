@@ -44,27 +44,34 @@ class SearcherController extends Controller
     }
 
     public function estadistica(){
-/*$productos = DB::table('producto_busqueda')->pluck('title', 'name')->get();
+        $productos = DB::select("select pb.id_producto, p.titulo, count(pb.id_producto) as 'cantidad' 
+        from  producto_busqueda pb
+        join productos p on pb.id_producto = p.id
+        group by pb.id_producto order 
+        by cantidad desc
+        limit 20");
+           for($i=0 ; $i<count($productos) ; $i++){
+            $palabras= DB::select("
+            select  pb.id_producto,b.busqueda, count(b.busqueda)as'cantidad'
+            from producto_busqueda pb
+            join busquedas b on pb.id_busqueda = b.id
+            where pb.id_producto=?
+            group by(b.busqueda)
+            order by cantidad desc
+            limit 5;",[$productos[$i]->id_producto]);
 
-dd($productos);/*
-        /*$productos = Productos::all();
-       foreach($productos as $producto){
-            echo"</br>**********</br>";
-            print_r($producto);
-            foreach($producto->busquedas as $bus){
-                echo"</br>";
-                print_r($bus);
+            $pal="(";
+            foreach($palabras as $palabra){
+                $pal.=$palabra->busqueda."(".$palabra->cantidad.")  ";
             }
-        }*/
+            $pal.=")";
+            $productos[$i]->palabras=$pal;
+        }
+        $productos=json_encode($productos);
+        return $productos;
+        
+        
     }
-    /* 
-select pb.id_producto, p.titulo, count(pb.id_producto) as 'cantidad' 
-from  producto_busqueda pb
-join productos p on pb.id_producto = p.id
-group by pb.id_producto order 
-by cantidad desc
-limit 20;
 
-*/
 
 }

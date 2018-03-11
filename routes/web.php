@@ -15,16 +15,11 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-/*$router->get('/key', function(){
-    return str_random(32);
-});
-*/
-
-$router->post('/search','SearcherController@search');
-
-$router->get('/estadistica','SearcherController@estadistica');
-
 $router->get('/php',function(){
     phpinfo();
 });
-//$router->post('/prueba','SearcherController@prueba');
+
+$router->post('/search','SearcherController@search');
+
+$router->post('/estadistica','SearcherController@estadistica');
+
