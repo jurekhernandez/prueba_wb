@@ -69,8 +69,6 @@ class SearcherController extends Controller
         }
         $productos=json_encode($productos);
         return $productos;
-        
-        
     }
 
 
