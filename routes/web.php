@@ -23,3 +23,5 @@ $router->post('/search','SearcherController@search');
 
 $router->post('/estadistica','SearcherController@estadistica');
 
+$router->get('/es','SearcherController@estadistica');
+
