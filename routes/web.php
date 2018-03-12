@@ -20,7 +20,7 @@ $router->get('/php',function(){
 });
 
 $router->post('/search','SearcherController@search');
-
+$router->get('/search','SearcherController@search');
 $router->post('/estadistica','SearcherController@estadistica');
 
 $router->get('/es','SearcherController@estadistica');
