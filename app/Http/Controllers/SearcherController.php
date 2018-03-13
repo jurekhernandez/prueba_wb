@@ -38,10 +38,6 @@ class SearcherController extends Controller
         return $busqueda->id;
     }
 
-    public function prueba(){
-        $productos = \App\Models\Productos::get();
-        return json_encode($productos);
-    }
 
     public function estadistica(){
         $productos = DB::select("select pb.id_producto, p.titulo, count(pb.id_producto) as 'cantidad' 
@@ -69,6 +65,31 @@ class SearcherController extends Controller
         }
         $productos=json_encode($productos);
         return $productos;
+    }
+
+    public function cargar(Request $request){
+        if ($request->hasFile('datos')) {
+            $csv = $request->file('datos');
+            //dd( $csv->sel_file['tmp_name'] );
+           /* $file = file_get_contents($csv, FILE_USE_INCLUDE_PATH);
+            var_dump(json_decode($file));*/
+
+            $csvData = file_get_contents($csv);
+            $lines = explode("$$", $csvData);
+            $array = array();
+            foreach ($lines as $line) {
+            $array[] = str_getcsv($line);
+            }
+            print_r($array);
+
+
+            return "HAY ARCHIVOP";
+        }
+        $archivo=$request->datos;
+       
+        $csvData = file_get_contents($archivo);
+        print_r($csvData);
+       return "no hay archivo";
     }
 
 
